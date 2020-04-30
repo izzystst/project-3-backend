@@ -13,7 +13,7 @@ ASANA MODEL
 SESSION MODEL
 ![session model](https://i.imgur.com/UGAxNax.png)
 
-USER ROUTES
+USER ROUTES and SESSION ROUTES
 ![user and session routes](https://imgur.com/CK2PWZj.png)
 
 ASANA ROUTES

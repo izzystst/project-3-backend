@@ -7,8 +7,8 @@ class User(UserMixin, Model):
 	username=CharField(unique=True)
 	email=CharField(unique=True)
 	password=CharField(unique=True)
-	zipcode=BigIntegerField()
-	created_on= DateTimeField(default=datetime.date)
+	# zipcode=CharField(unique=True)
+	created_on= DateTimeField(default=datetime.date.today)
 
 	class Meta:
 		database = DATABASE
