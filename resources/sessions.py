@@ -11,9 +11,9 @@ from flask_login import LoginManager, current_user
 
 sessions = Blueprint('sessions', 'sessions')
 
-@sessions.route('/', methods=['GET'])
-def test_session():
-	return "session resource works"
+# @sessions.route('/', methods=['GET'])
+# def test_session():
+# 	return "session resource works"
 # create rouet
 @sessions.route('/', methods=['POST'])
 def create_session():
@@ -22,14 +22,23 @@ def create_session():
 	print(new_session)
 	session_dict = model_to_dict(new_session)
 	session_dict['user'].pop('password')
+	
 	return jsonify(
 		data=session_dict,
 		message="succesffuly created a session",
 		status=200
 		), 200
 
-
-
+@sessions.route('/', methods=['GET'])
+def sessions_index():
+	sessions = models.Session.select()
+	sessions_dict = [model_to_dict(session) for session in sessions]
+	print(sessions_dict)
+	return jsonify(
+		data=sessions_dict,
+		message="found all sessions",
+		status=200
+		),200
 	# 	date=DateTimeField(default=datetime.date.today)
 	# length=BigIntegerField()
 	# notes=TextField()
