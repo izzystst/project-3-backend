@@ -13,11 +13,32 @@ class User(UserMixin, Model):
 
 	class Meta:
 		database = DATABASE
+class Session(Model):
+	date=DateTimeField(default=datetime.date.today)
+	length=BigIntegerField()
+	notes=TextField()
+	user=ForeignKeyField(User, backref='asanas')
 
+	class Meta:
+		database = DATABASE
 
+class Asana(Model):
+	name=CharField()
+	difficulty=SmallIntegerField()
+	instructions=CharField()
+
+	class Meta:
+		database=DATABASE
+
+class SessionPoses(Model):
+	session=ForeignKeyField(Session, backref='asanas')
+	asana=ForeignKeyField(Asana, backref='asanas')
+
+	class Meta:
+		database = DATABASE
 def initialize():
 	DATABASE.connect()
-	DATABASE.create_tables([User], safe=True)
+	DATABASE.create_tables([User, Session, Asana, SessionPoses], safe=True)
 	print("connected to db and created tables!")
 
 	DATABASE.close()
