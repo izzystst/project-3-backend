@@ -43,3 +43,12 @@ def sessions_index():
 	# length=BigIntegerField()
 	# notes=TextField()
 	# user=ForeignKeyField(User, backref='sessions', defaul)
+@sessions.route("/<id>", methods=['GET'])
+def session_show(id):
+	session = models.Session.get_by_id(id)
+	session_dict = model_to_dict(session)
+	return jsonify(
+		data=session_dict,
+		message=f"found session with id {id}",
+		status=200
+		), 200
