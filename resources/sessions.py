@@ -69,7 +69,16 @@ def update_session(id):
 		message=f"update session with id {id}",
 		status=200
 		), 200
-
+@sessions.route('/<id>', methods=['DELETE'])
+def delete_session(id):
+	delete_query = models.Session.delete().where(models.Session.id==id)
+	num_rows_deleted = delete_query.execute()
+	print(num_rows_deleted)
+	return jsonify(
+		data={},
+		message=f"deleted session {num_rows_deleted} with id {id}",
+		status=200
+		),200
 
 
 
