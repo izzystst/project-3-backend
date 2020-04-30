@@ -1,6 +1,6 @@
 from peewee import *
 import datetime
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 
 DATABASE = SqliteDatabase('asanas.sqlite')
 
@@ -28,7 +28,7 @@ class Asana(Model):
 	instructions=CharField()
 
 	class Meta:
-		database=DATABASE
+		database = DATABASE
 
 class SessionPoses(Model):
 	session=ForeignKeyField(Session, backref='sessions')
