@@ -5,16 +5,16 @@
 
 
 USER MODEL 
-![user model](https://i.imgur.com/TZMdR6D.png)
+![user model updated](https://imgur.com/Q2Iq9Pm)
 
 ASANA MODEL
-![asanas model](https://i.imgur.com/4b5jahI.png)
+![asanas model](https://imgur.com/dXmS5hM)
 
 SESSION MODEL
 ![session model](https://i.imgur.com/UGAxNax.png)
 
 USER ROUTES
-![user routes](https://i.imgur.com/FgtsSj8.png)
+![user and session routes](https://imgur.com/CK2PWZj)
 
-ESSION ROUTES
-![session routes](https://i.imgur.com/e5pimkv.png)
+ASANA ROUTES
+![asana routes](https://imgur.com/cU7zrGM)
