@@ -13,3 +13,6 @@ sessions = Blueprint('sessions', 'sessions')
 @sessions.route('/', methods=['GET'])
 def test_session():
 	return "session resource works"
+# create rouet
+# @sessions.route('/', methods=['POST'])
+# def creat_session():

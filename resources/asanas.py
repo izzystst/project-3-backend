@@ -22,7 +22,13 @@ def create_asana():
 # index route
 @asanas.route('/', methods=["GET"])
 def asanas_index():
-	return "blah"
+	asanas = models.Asana.select()
+	asanas_dict = [model_to_dict(asana) for asana in asanas]
+	print(asanas_dict)
+	return jsonify(
+		data=asanas_dict,
+		message="found all the asanas",
+		status=200), 200
 
 
 # show route
