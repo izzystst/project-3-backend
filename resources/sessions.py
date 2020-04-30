@@ -52,3 +52,25 @@ def session_show(id):
 		message=f"found session with id {id}",
 		status=200
 		), 200
+
+@sessions.route('/<id>', methods=["POST"])
+def update_session(id):
+	payload= request.get_json()
+	update_query= models.Session.update(
+		length=payload['length'],
+		notes=payload['notes']
+		).where(models.Session.id==id)
+	num_rows_modified = update_query.execute()
+	updated_session = models.Session.get_by_id(id)
+	update_session_dict = model_to_dict(updated_session)
+
+	return jsonify(
+		data=update_session_dict,
+		message=f"update session with id {id}",
+		status=200
+		), 200
+
+
+
+
+
