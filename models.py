@@ -1,13 +1,14 @@
 from peewee import *
 import datetime
 from flask_login import UserMixin
+
 DATABASE = SqliteDatabase('asanas.sqlite')
 
 class User(UserMixin, Model):
 	username=CharField(unique=True)
 	email=CharField(unique=True)
 	password=CharField(unique=True)
-	# zipcode=CharField(unique=True)
+	zipcode=CharField()
 	created_on= DateTimeField(default=datetime.date.today)
 
 	class Meta:
