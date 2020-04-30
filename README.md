@@ -2,6 +2,8 @@
 
 #CONCEPT
 	users can log what yoga poses they have done. the session will include the poses and added information about the time that they did it.
+
+
 USER MODEL --
 ![user model](https://i.imgur.com/TZMdR6D.png)
 ---------------
@@ -11,7 +13,7 @@ USER MODEL --
 ---SESSION MODEL---
 ![session model](https://i.imgur.com/UGAxNax.png)
 -------------------
----USER ROUTES---
+
 ![user routes](https://i.imgur.com/FgtsSj8.png)
 -----------------
 ---SESSION ROUTES---
