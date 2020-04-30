@@ -19,3 +19,20 @@ def create_asana():
 		message='congrats you added a new asana',
 		status=201
 		),201
+# index route
+@asanas.route('/', methods=["GET"])
+def asanas_index():
+	return "blah"
+
+
+# show route
+@asanas.route('<id>', methods=["GET"])
+def show_asana(id):
+	asana = models.Asana.get_by_id(id)
+
+	asana_dict=model_to_dict(asana)
+
+	return jsonify(
+		data=asana_dict,
+		message=f'found asana with id {id}',
+		status=200), 200
