@@ -1,20 +1,20 @@
 # project-3-backend
 
-#CONCEPT
+# CONCEPT
 	users can log what yoga poses they have done. the session will include the poses and added information about the time that they did it.
 
 
-USER MODEL --
+USER MODEL 
 ![user model](https://i.imgur.com/TZMdR6D.png)
 
---ASANA MODEL --
+ASANA MODEL
 ![asanas model](https://i.imgur.com/4b5jahI.png)
 
----SESSION MODEL---
+SESSION MODEL
 ![session model](https://i.imgur.com/UGAxNax.png)
 
----USER ROUTES---
+USER ROUTES
 ![user routes](https://i.imgur.com/FgtsSj8.png)
 
----SESSION ROUTES---
+ESSION ROUTES
 ![session routes](https://i.imgur.com/e5pimkv.png)
