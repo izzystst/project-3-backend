@@ -1,4 +1,5 @@
 from peewee import *
+import datetime
 from flask_login import UserMixin
 DATABASE = SqliteDatabase('asanas.sqlite')
 
@@ -7,6 +8,7 @@ class User(UserMixin, Model):
 	email=CharField(unique=True)
 	password=CharField(unique=True)
 	zipcode=BigIntegerField()
+	created_on= DateTimeField(default=datetime.date)
 
 	class Meta:
 		database = DATABASE
