@@ -7,6 +7,8 @@ from playhouse.shortcuts import model_to_dict
 from flask_login import LoginManager, current_user
 
 
+import pprint
+pp = pprint.PrettyPrinter(indent=4)
 
 
 sessions = Blueprint('sessions', 'sessions')
@@ -17,17 +19,20 @@ sessions = Blueprint('sessions', 'sessions')
 # create rouet
 @sessions.route('/', methods=['POST'])
 def create_session():
+	
 	payload= request.get_json()
 	print('this is the payload')
-	print(payload)
+	print(payload['asana'])
 	new_session = models.Session.create(length=payload['length'], notes=payload['notes'], user=current_user.id)
 	print(new_session)
 	session_dict = model_to_dict(new_session)
 	session_dict['user'].pop('password')
-	print(session_dict)
-	new_poseSession = models.SessionPoses.create(asana=payload['asana'], session=session_dict['id'])
-	print('this is the pose session create')
-	print(model_to_dict(new_poseSession))
+	print("this is the asana payload")
+	print(payload['asana'][0])
+	for asana in payload['asana']:
+		new_poseSession = models.SessionPoses.create(asana=asana, session=session_dict['id'])
+		print('this is the pose session create')
+		pp.pprint(model_to_dict(new_poseSession))
 	return jsonify(
 		data=session_dict,
 		message="succesffuly created a session",
@@ -44,10 +49,8 @@ def sessions_index():
 		message="found all sessions",
 		status=200
 		),200
-	# 	date=DateTimeField(default=datetime.date.today)
-	# length=BigIntegerField()
-	# notes=TextField()
-	# user=ForeignKeyField(User, backref='sessions', defaul)
+
+
 @sessions.route("/<id>", methods=['GET'])
 def session_show(id):
 	session = models.Session.get_by_id(id)

@@ -20,7 +20,13 @@ def load_user(user_id):
 		return models.User.get_by_id(user_id)
 	except models.DoesNotExist:
 		return None
-
+@login_manager.unauthorized_handler
+def unautherized():
+	return jsonify(
+		data={"error":'user not logged in'},
+		message="you must be logged in to access this",
+		status=401
+		), 401
 app.register_blueprint(users, url_prefix='/api/v1/users')
 app.register_blueprint(sessions, url_prefix='/api/v1/sessions')
 app.register_blueprint(asanas, url_prefix='/api/v1/asanas')

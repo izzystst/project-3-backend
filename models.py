@@ -1,6 +1,7 @@
 from peewee import *
 import datetime
 from flask_login import UserMixin, current_user
+import pprint
 
 DATABASE = SqliteDatabase('asanas.sqlite')
 
