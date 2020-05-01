@@ -18,11 +18,16 @@ sessions = Blueprint('sessions', 'sessions')
 @sessions.route('/', methods=['POST'])
 def create_session():
 	payload= request.get_json()
+	print('this is the payload')
+	print(payload)
 	new_session = models.Session.create(length=payload['length'], notes=payload['notes'], user=current_user.id)
 	print(new_session)
 	session_dict = model_to_dict(new_session)
 	session_dict['user'].pop('password')
-	
+	print(session_dict)
+	new_poseSession = models.SessionPoses.create(asana=payload['asana'], session=session_dict['id'])
+	print('this is the pose session create')
+	print(model_to_dict(new_poseSession))
 	return jsonify(
 		data=session_dict,
 		message="succesffuly created a session",
