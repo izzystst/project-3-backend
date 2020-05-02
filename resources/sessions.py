@@ -33,6 +33,7 @@ def create_session():
 		new_poseSession = models.SessionPoses.create(asana=asana, session=session_dict['id'])
 		print('this is the pose session create')
 		pp.pprint(model_to_dict(new_poseSession))
+		print(new_poseSession.session.id)
 	return jsonify(
 		data=session_dict,
 		message="succesffuly created a session",
@@ -68,6 +69,13 @@ def update_session(id):
 		length=payload['length'],
 		notes=payload['notes']
 		).where(models.Session.id==id)
+
+	# for asana in payload['asana']:
+	# 	update_pose_query=models.SessionPoses.update(
+	# 		asana=asana
+	# 	).where(models.SessionPoses.session.id==id)
+	# 	sessionP_num_rows_modified = update_pose_query.execute()
+
 	num_rows_modified = update_query.execute()
 	updated_session = models.Session.get_by_id(id)
 	update_session_dict = model_to_dict(updated_session)

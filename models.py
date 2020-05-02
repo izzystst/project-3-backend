@@ -1,7 +1,6 @@
 from peewee import *
 import datetime
 from flask_login import UserMixin, current_user
-import pprint
 
 DATABASE = SqliteDatabase('asanas.sqlite')
 
@@ -16,7 +15,7 @@ class User(UserMixin, Model):
 		database = DATABASE
 class Session(Model):
 	date=DateTimeField(default=datetime.date.today)
-	length=BigIntegerField()
+	length=TextField()
 	notes=TextField()
 	user=ForeignKeyField(User, backref='sessions')
 
