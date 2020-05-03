@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from resources.users import users
 from resources.sessions import sessions
 from resources.asanas import asanas
+from resources.sessionposes import sessionposes
 from flask_cors import CORS
 
 from flask_login import LoginManager, current_user
@@ -41,6 +42,7 @@ CORS(users, origins=['http://localhost:3000'],supports_credentials=True)
 app.register_blueprint(sessions, url_prefix='/api/v1/sessions')
 app.register_blueprint(users, url_prefix='/api/v1/users')
 app.register_blueprint(asanas, url_prefix='/api/v1/asanas')
+app.register_blueprint(sessionposes, url_prefix='/api/v1/sessionposes')
 @app.route('/')
 def hello():
 	return 'hell world!'

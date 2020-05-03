@@ -35,7 +35,7 @@ def create_session():
 		pp.pprint(model_to_dict(new_poseSession))
 		print(new_poseSession.session.id)
 	return jsonify(
-		data=session_dict,
+		data=session_dict, 
 		message="succesffuly created a session",
 		status=200
 		), 200
@@ -45,9 +45,14 @@ def sessions_index():
 	sessions = models.Session.select()
 	sessions_dict = [model_to_dict(session) for session in sessions]
 	print(sessions_dict)
+	asanas_in_sessions = models.SessionPoses.select()
+	print('this is the asana in the session')
+	print(asanas_in_sessions)
+	asanas_in_session_dict = [model_to_dict(asanas_in_session) for asanas_in_session in asanas_in_sessions]
+	pp.pprint(asanas_in_session_dict)
 	return jsonify(
-		data=sessions_dict,
-		message="found all sessions",
+		data={'session': sessions_dict, 'asanas': asanas_in_session_dict},
+		message="found all sessions and the poses in them",
 		status=200
 		),200
 
