@@ -27,3 +27,6 @@ def session_poses():
 		status=200
 		), 200
 		
+# @sessionposes.route('/<id>', methods=["GET"])
+# def index_of_sessions():
+	

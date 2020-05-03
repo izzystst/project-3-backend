@@ -61,6 +61,27 @@ def sessions_index():
 def session_show(id):
 	session = models.Session.get_by_id(id)
 	session_dict = model_to_dict(session)
+
+
+	asanas = models.SessionPoses.select().where(models.SessionPoses.session == id)
+	# asanas.execute()
+	print('these are the asanas')
+	print(asanas)
+	# asanas_dict = model_to_dict(asanas)
+	# print(asanas_dict)
+	asana_dict = [model_to_dict(asana) for asana in asanas]
+	pp.pprint(asana_dict)
+
+	# asanas_list=[]
+	# for asana in asanas:
+	# 	if asana["session"] == id:
+	# 		print(asana)
+	# 		asanas_list.append(asana)
+
+
+	# print(asanas_list)
+	print("this is asans after the loop")
+	print(asanas)
 	return jsonify(
 		data=session_dict,
 		message=f"found session with id {id}",
