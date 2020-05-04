@@ -31,8 +31,8 @@ class Asana(Model):
 		database = DATABASE
 
 class SessionPoses(Model):
-	session=ForeignKeyField(Session, backref='sessions')
-	asana=ForeignKeyField(Asana, backref='asanas')
+	session=ForeignKeyField(Session, backref='sessionposes')
+	asana=ForeignKeyField(Asana, backref='sessionposes')
 
 	class Meta:
 		database = DATABASE
