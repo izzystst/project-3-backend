@@ -35,7 +35,7 @@ def unautherized():
 
 CORS(sessions, origins=['http://localhost:3000'],supports_credentials=True)
 CORS(users, origins=['http://localhost:3000'],supports_credentials=True)
-
+CORS(asanas, origins=['http://localhost:3000'], supports_credentials=True)
 
 
 

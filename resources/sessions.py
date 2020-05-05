@@ -44,51 +44,62 @@ def create_session():
 def sessions_index():
 	sessions = models.Session.select()
 	print('this is the sessions')
-	pp.pprint(sessions)
-	for session in sessions:
-		pp.pprint(model_to_dict(session))
-
-
-	sessions_dict = [model_to_dict(session) for session in sessions]
-	# pp.pprint(sessions_dict)
 	asanas_in_sessions = models.SessionPoses.select().order_by('session')
+	asanas_in_session_dict = [model_to_dict(asanas_in_session) for asanas_in_session in asanas_in_sessions]
+	# pp.pprint(sessions)
+	total = []
+	for session in sessions:
+		session_dict = model_to_dict(session)
+		asanas = []
+		for session_pose in asanas_in_session_dict:
+			if(session_pose['session']['id'] == session.id):
+
+				asanas.append(session_pose['asana'])
+				pp.pprint(session_pose)
+				pp.pprint(session)
+
+		session_dict['asanas'] = asanas
+		total.append(session_dict)
+		pp.pprint(session_dict) 
+	
+	print('this is the the total')
+	# pp.pprint(total)
+	print('this is total index 1')
+	# pp.print(total[1])
+	# sessions_dict = [model_to_dict(session) for session in sessions]
+	# pp.pprint(sessions_dict)
 	# print('this is the asana in the session')
 	# pp.pprint(asanas_in_sessions)
-	asanas_in_session_dict = [model_to_dict(asanas_in_session) for asanas_in_session in asanas_in_sessions]
 	# print("these are the asanas in dict")
 	# pp.pprint(asanas_in_session_dict)
 	# sessions_dict.update(asanas_in_session_dict)
 	# pp.pprint(session_dict)
-	id_list = []
-	final_list = []
-	current_id = 1
-	for asana in asanas_in_session_dict:
-		print(asana)
-		# print(asana['session']['id'])
-		# if asana if matches curent id, push to id list, if not put the id list , in final list, as a list, empty list, checnage current id of the one that didnt match 
-		if(asana['session']['id'] == current_id):
+	
+	# for asana in asanas_in_session_dict:
+	# 	print(asana)
+	# 	# print(asana['session']['id'])
+	# 	# if asana if matches curent id, push to id list, if not put the id list , in final list, as a list, empty list, checnage current id of the one that didnt match 
+	# 	if(asana['session']['id'] == current_id):
 
-			id_list.append(asana)
+	# 		id_list.append(asana)
 
-		else:
-			pp.pprint(id_list)
-			final_list.append(id_list)
+	# 	else:
+	# 		pp.pprint(id_list)
+	# 		final_list.append(id_list)
 		
-			# print('this is now the current id')
-			current_id = asana['id']
-			# print(current_id)
-			id_list = []
+	# 		# print('this is now the current id')
+	# 		current_id = asana['id']
+	# 		# print(current_id)
+	# 		id_list = []
 
 
 
-	print("this is the final list")
-	pp.pprint(final_list)
 			# print("this is the asanas in session dict")
 			# make final list a list dictionaries - probably not worth it  
 		# ?sessions_dict[asanas] = final list
 	# pp.pprint(asanas_in_session_dict)
 	return jsonify(
-		data={'session': sessions_dict, 'asanas': asanas_in_session_dict},
+		data=total,
 		message="found all sessions and the poses in them",
 		status=200
 		),200
@@ -120,7 +131,7 @@ def session_show(id):
 	print("this is asans after the loop")
 	print(asanas)
 	return jsonify(
-		data=session_dict,
+		data={'session': session_dict, 'asanas': asana_dict },
 		message=f"found session with id {id}",
 		status=200
 		), 200
