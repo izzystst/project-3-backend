@@ -44,7 +44,7 @@ def create_session():
 def sessions_index():
 	sessions = models.Session.select()
 	print('this is the sessions')
-	asanas_in_sessions = models.SessionPoses.select().order_by('session')
+	asanas_in_sessions = models.SessionPoses.select()
 	asanas_in_session_dict = [model_to_dict(asanas_in_session) for asanas_in_session in asanas_in_sessions]
 	# pp.pprint(sessions)
 	total = []
@@ -61,43 +61,11 @@ def sessions_index():
 		session_dict['asanas'] = asanas
 		total.append(session_dict)
 		pp.pprint(session_dict) 
-	
 	print('this is the the total')
+	pp.pprint(total)
 	# pp.pprint(total)
-	print('this is total index 1')
-	# pp.print(total[1])
-	# sessions_dict = [model_to_dict(session) for session in sessions]
-	# pp.pprint(sessions_dict)
-	# print('this is the asana in the session')
-	# pp.pprint(asanas_in_sessions)
-	# print("these are the asanas in dict")
-	# pp.pprint(asanas_in_session_dict)
-	# sessions_dict.update(asanas_in_session_dict)
-	# pp.pprint(session_dict)
-	
-	# for asana in asanas_in_session_dict:
-	# 	print(asana)
-	# 	# print(asana['session']['id'])
-	# 	# if asana if matches curent id, push to id list, if not put the id list , in final list, as a list, empty list, checnage current id of the one that didnt match 
-	# 	if(asana['session']['id'] == current_id):
+	# print('this is total index 1')
 
-	# 		id_list.append(asana)
-
-	# 	else:
-	# 		pp.pprint(id_list)
-	# 		final_list.append(id_list)
-		
-	# 		# print('this is now the current id')
-	# 		current_id = asana['id']
-	# 		# print(current_id)
-	# 		id_list = []
-
-
-
-			# print("this is the asanas in session dict")
-			# make final list a list dictionaries - probably not worth it  
-		# ?sessions_dict[asanas] = final list
-	# pp.pprint(asanas_in_session_dict)
 	return jsonify(
 		data=total,
 		message="found all sessions and the poses in them",
@@ -125,7 +93,10 @@ def session_show(id):
 	# 	if asana["session"] == id:
 	# 		print(asana)
 	# 		asanas_list.append(asana)
-
+	print("this is the session dict")
+	pp.pprint(session_dict)
+	print("this is the asana dict")
+	pp.pprint(asana_dict)
 
 	# print(asanas_list)
 	print("this is asans after the loop")
