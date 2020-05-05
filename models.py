@@ -15,7 +15,7 @@ class User(UserMixin, Model):
 		database = DATABASE
 class Session(Model):
 	date=DateTimeField(default=datetime.date.today)
-	length=BigIntegerField()
+	length=TextField()
 	notes=TextField()
 	user=ForeignKeyField(User, backref='sessions')
 
@@ -31,8 +31,8 @@ class Asana(Model):
 		database = DATABASE
 
 class SessionPoses(Model):
-	session=ForeignKeyField(Session, backref='sessions')
-	asana=ForeignKeyField(Asana, backref='asanas')
+	session=ForeignKeyField(Session, backref='sessionposes')
+	asana=ForeignKeyField(Asana, backref='sessionposes')
 
 	class Meta:
 		database = DATABASE
