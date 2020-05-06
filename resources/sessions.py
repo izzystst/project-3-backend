@@ -107,7 +107,7 @@ def session_show(id):
 		status=200
 		), 200
 
-@sessions.route('/<id>', methods=["POST"])
+@sessions.route('/<id>', methods=["PUT"])
 def update_session(id):
 	payload= request.get_json()
 	update_query= models.Session.update(
@@ -125,6 +125,10 @@ def update_session(id):
 	updated_session = models.Session.get_by_id(id)
 	update_session_dict = model_to_dict(updated_session)
 
+	asanas = models.SessionPoses.select().where(models.SessionPoses.session == id)
+	asana_dict = [model_to_dict(asana) for asana in asanas]
+	update_session_dict['asanas'] = asana_dict
+
 	return jsonify(
 		data=update_session_dict,
 		message=f"update session with id {id}",
@@ -141,6 +145,14 @@ def delete_session(id):
 		status=200
 		),200
 
+@sessions.route('/user/<userId>', methods=['GET'])
+def user_sessions(userId):
+	sessions = models.Session.select().where(models.Session.user == userId)
+	sessions_dict = [model_to_dict(session) for session in sessions]
 
+	return jsonify(
+		data= sessions_dict,
+		message=f"found the session that beling to user {userId}",
+		status=200),200
 
 
