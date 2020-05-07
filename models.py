@@ -9,7 +9,8 @@ if 'ON_HEROKU' in os.environ:
 
 
 else:
-	DATABASE = SqliteDatabase('asanas.sqlite')
+	DATABASE = SqliteDatabase('asanas.sqlite',
+		pragmas = {'foreign_keys': 1})
 
 class User(UserMixin, Model):
 	username=CharField(unique=True)
@@ -24,7 +25,7 @@ class Session(Model):
 	date=DateTimeField(default=datetime.date.today)
 	length=TextField()
 	notes=TextField()
-	user=ForeignKeyField(User, backref='sessions')
+	user=ForeignKeyField(User, backref='sessions', on_delete="CASCADE")
 
 	class Meta:
 		database = DATABASE
@@ -38,8 +39,8 @@ class Asana(Model):
 		database = DATABASE
 
 class SessionPoses(Model):
-	session=ForeignKeyField(Session, backref='sessionposes')
-	asana=ForeignKeyField(Asana, backref='sessionposes')
+	session=ForeignKeyField(Session, backref='sessionposes', on_delete="CASCADE")
+	asana=ForeignKeyField(Asana, backref='sessionposes',  on_delete="CASCADE")
 
 	class Meta:
 		database = DATABASE

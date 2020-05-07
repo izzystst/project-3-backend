@@ -125,9 +125,9 @@ def update_session(id):
 	updated_session = models.Session.get_by_id(id)
 	update_session_dict = model_to_dict(updated_session)
 
-	asanas = models.SessionPoses.select().where(models.SessionPoses.session == id)
-	asana_dict = [model_to_dict(asana) for asana in asanas]
-	update_session_dict['asanas'] = asana_dict
+	# asanas = models.SessionPoses.select().where(models.SessionPoses.session == id)
+	# asana_dict = [model_to_dict(asana) for asana in asanas]
+	# update_session_dict['asanas'] = asana_dict
 
 	return jsonify(
 		data=update_session_dict,
